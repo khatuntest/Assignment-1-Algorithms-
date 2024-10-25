@@ -1,0 +1,30 @@
+void multiplication(int ma1[2][2],int ma2[2][2]){
+    int a=ma1[0][0]*ma2[0][0]+ma1[0][1]*ma2[1][0];
+    int b=ma1[0][0]*ma2[0][1]+ma1[0][1]*ma2[1][1];
+    int c=ma1[1][0]*ma2[0][0]+ma1[1][1]*ma2[1][0];
+    int d=ma1[1][0]*ma2[0][1]+ma1[1][1]*ma2[1][1];
+    ma1[0][0]=a;
+    ma1[0][1]=b;
+    ma1[1][0]=c;
+    ma1[1][1]=d;
+}
+void pow(int ma[2][2] ,int n){
+    if(n==0||n==1){
+        return;
+    }
+    int original[2][2]={{1,1},{1,0}};
+    pow(ma,n/2);
+    multiplication(ma,ma);
+    if(n%2){
+        multiplication(ma,original);
+    }
+}
+int Fibonacci(int n){
+    if(n==0){
+        return 0;
+    }
+    int matrix[2][2]={{1,1},{1,0}};
+    pow(matrix,n-1);
+    return matrix[0][0];
+
+}
