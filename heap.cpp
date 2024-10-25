@@ -56,3 +56,42 @@ bool heap :: isEmpty() const {
 int heap :: size() const{
     return heapSize;
 }
+
+void heap::MaxHeapify(int *arr, int size, int index) {
+    int largest=index;
+    int left=(2*index)+1;
+    int right=(2*index)+2;
+    if(left<size&&arr[left]>arr[largest]){
+        largest=left;
+    }
+    if(right<size&&arr[right]>arr[largest]){
+        largest=right;
+    }
+    if(largest!=index){
+        swap(arr[largest],arr[index]);
+        MaxHeapify(arr,size,largest);
+    }
+
+}
+
+void heap::BuildMaxHeap(int *arr, int size) {
+int node=(size/2)-1;
+    for (int i = node; i >=0 ; --i) {
+        MaxHeapify(arr,size,i);
+    }
+}
+
+void heap::print(int *arr, int size) {
+    for (int i = 0; i < size; ++i) {
+        cout<<arr[i]<<" ";
+    }
+}
+
+void heap::HeapSort(int *arr, int size) {
+    BuildMaxHeap(arr,size);
+    for (int i = size-1; i >=1 ; i--) {
+        swap(arr[0],arr[i]);
+       int k=(size-=1);
+        MaxHeapify(arr,k,0);
+    }
+}
