@@ -1,0 +1,18 @@
+void BinarySearch(vector<ll>& v,int target){
+    ll left=-1;
+    ll right=v.size()+1;
+    while (right>left+1){
+        ll mid=(left+right)/2;
+        if(v[mid]==target){
+            cout<<" The index of element "<<target<<" = "<<mid;
+            return;
+        }
+        else if(v[mid]>target){
+            right=mid;
+        }
+        else{
+            left=mid;
+        }
+    }
+    cout << "Element " << target << " not found in the list";
+}
