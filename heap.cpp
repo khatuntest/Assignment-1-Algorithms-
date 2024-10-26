@@ -57,41 +57,46 @@ int heap :: size() const{
     return heapSize;
 }
 
-void heap::MaxHeapify(int *arr, int size, int index) {
-    int largest=index;
-    int left=(2*index)+1;
-    int right=(2*index)+2;
-    if(left<size&&arr[left]>arr[largest]){
-        largest=left;
-    }
-    if(right<size&&arr[right]>arr[largest]){
-        largest=right;
-    }
-    if(largest!=index){
-        swap(arr[largest],arr[index]);
-        MaxHeapify(arr,size,largest);
-    }
+void heap::MaxHeapify(int index) {
+    int largest = index;
+    int left = leftChild(index);
+    int right = rightChild(index);
 
+    if (left < heapSize && heapList[left] > heapList[largest]) {
+        largest = left;
+    }
+    if (right < heapSize && heapList[right] > heapList[largest]) {
+        largest = right;
+    }
+    if (largest != index) {
+        swap(heapList[largest], heapList[index]);
+        MaxHeapify(largest);
+    }
 }
 
-void heap::BuildMaxHeap(int *arr, int size) {
-int node=(size/2)-1;
+
+void heap::BuildMaxHeap(const deque<int>& arr)  {
+    heapList = arr;
+    heapSize = arr.size();
+    int node =(heapSize/2)-1;
     for (int i = node; i >=0 ; --i) {
-        MaxHeapify(arr,size,i);
+        MaxHeapify(i);
     }
 }
 
-void heap::print(int *arr, int size) {
-    for (int i = 0; i < size; ++i) {
-        cout<<arr[i]<<" ";
+void heap::print() {
+    for (int i = 0; i < heapSize; ++i) {
+        cout<<heapList[i]<<" ";
     }
 }
 
-void heap::HeapSort(int *arr, int size) {
-    BuildMaxHeap(arr,size);
-    for (int i = size-1; i >=1 ; i--) {
-        swap(arr[0],arr[i]);
-       int k=(size-=1);
-        MaxHeapify(arr,k,0);
+void heap::HeapSort() {
+    BuildMaxHeap(heapList);
+    int size=heapSize;
+    for (int i = heapSize-1; i >=1 ; i--) {
+        swap(heapList[0], heapList[i]);
+       heapSize--;
+        MaxHeapify(0);
     }
+    heapSize=size;
 }
