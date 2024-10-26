@@ -26,10 +26,10 @@ public:
     int getMin() const;// Get the minimum element without extracting it
     bool isEmpty() const ;// Check if the heap is empty
     int size() const ;// Get the size of the heap
-void MaxHeapify(int arr[],int size,int index); //If I get an array and there is a problem with certain node
-  void BuildMaxHeap(int arr[],int size);
-  void print(int arr[],int size);
-  void  HeapSort(int arr[],int size);
+ void MaxHeapify(int index);
+  void BuildMaxHeap(const deque<int>& arr) ;
+  void print();
+  void  HeapSort();
 
 };
 
