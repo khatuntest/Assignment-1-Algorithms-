@@ -11,5 +11,15 @@ int main() {
     h.insert(25);
     cout<<"Max element: "<<h.getMax()<<"\n";
     cout<<"Min element: "<<h.getMin()<<"\n";
+     heap h2;
+    deque<int> arr = {12, 11, 13, 5, 6, 7};
+
+    h2.BuildMaxHeap(arr);
+    cout << "Max heap:";
+    h2.print();
+
+    h2.HeapSort();
+    cout << "Sorted heap: ";
+    h2.print();
     return 0;
 }
