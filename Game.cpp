@@ -31,8 +31,17 @@ public:
             cout << "No players available in the leaderboard." << endl;
         }
     }
-    void joinGame(int playerID, int initialScore = 0) {};
-    void leaveGame(int playerID) {};
+    void joinGame(int playerID, int initialScore = 0) {
+         playerScore[PlayerID]=intialScore;
+         scoreList.insert(PlayerID);
+    };
+    void leaveGame(int playerID) {
+        if(playerScore.find(PlayerID)!=playerScore.end()){
+            scoreList.Delete(PlayerID);
+        }else{
+             Cout<<”player not exist”<<endl;
+                } 
+    };
     void viewScore(int playerID) {};
 
 };
