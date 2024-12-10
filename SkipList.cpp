@@ -68,3 +68,53 @@ void SkipList::print() {
         cout << "\n";
     }
 }
+ bool SkipList::Search(int value) {
+              Node*current=header;
+                for(int i=currentLevel ;i>=0;i--){
+                    while(current->forward[i] && current->forward[i]->key < value){
+                        current=current->forward[i];
+                    }
+
+                }
+                current= current->forward[0];
+
+                if(current && current->key==value) return true;
+                else return false;
+
+}
+void SkipList:: Delete(int value){
+    Node*current=header;
+    Node*update[maxLevel+1];
+
+    for(int i=currentLevel ;i>=0;i--){
+        while(current->forward[i] && current->forward[i]->key < value){
+            current=current->forward[i];
+        }
+        update[i]=current;
+    }
+
+    current=current->forward[0];
+
+    if(current && current->key==value) {
+
+        for (int i = 0; i <= currentLevel; i++) {
+
+            if (update[i]->forward[i] != current) {
+
+                break;
+
+            }
+            update[i]->forward[i] = current->forward[i];
+
+        }
+        delete current;
+
+
+        while (currentLevel > 0 && !header->forward[currentLevel]) {
+            currentLevel--;
+
+        }
+        cout << "deleted successfully" << endl;
+    }
+}
+
