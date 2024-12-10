@@ -31,16 +31,23 @@ public:
             cout << "No players available in the leaderboard." << endl;
         }
     }
-    void joinGame(int playerID, int initialScore = 0) {
-         playerScore[PlayerID]=intialScore;
-         scoreList.insert(PlayerID);
+  void joinGame(int playerID, int initialScore = 0) {
+        if(playerScore.find(playerID)==playerScore.end()) {
+            playerScore[playerID] = initialScore;
+            scoreList.insert(playerID);
+            cout<<"joined successfully"<<endl;
+        }else{
+            cout<<"player is already exist"<<endl;
+        }
     };
     void leaveGame(int playerID) {
-        if(playerScore.find(PlayerID)!=playerScore.end()){
-            scoreList.Delete(PlayerID);
+        if(playerScore.find(playerID)!=playerScore.end()){
+            scoreList.Delete(playerID);
+            playerScore.erase(playerID);
+            cout<<"player leave game"<<endl;
         }else{
-             Cout<<”player not exist”<<endl;
-                } 
+            cout<<"player not exist"<<endl;
+        }
     };
     void viewScore(int playerID) {};
 
