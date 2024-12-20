@@ -16,9 +16,9 @@ void Priority_queue::heapify(vector<int> &heap, int index, int heapsize) {
     int right=index*2+1;
     int largest=INT_MIN;
     if(left<heapsize && heap[index]>heap[left]){
-        largest=heap[index];
+        largest=index;
     }else{
-        largest=heap[left];
+        largest=left;
     }
     if(right<heapsize && heap[largest]>heap[right]){
         largest=heap[right];
@@ -42,7 +42,7 @@ int Priority_queue::heap_maxmium() {
 void Priority_queue::increase_key(int index, int key) {
     heap[index]=key;
     int i=index;
-    while(i!=1 && heap[i/2]<heap[i-1]){
+    while(i!=1 && heap[i/2]<heap[i]){
         heap[i]=heap[i/2];
         i=i/2;
     }
@@ -58,7 +58,7 @@ int Priority_queue::heap_extract() {
     int max=heap[0];
     heap[0]=heap[heapsize-1];
 
-    heapify(heap,1,heapsize-1);
+    heapify(heap,0,heapsize-1);
 }
 
 
