@@ -1,4 +1,11 @@
 //
+// Created by Ts on 20/12/2024.
+//
+
+#ifndef TEST_PQ_PRIORITY_QUEUE_H
+#define TEST_PQ_PRIORITY_QUEUE_H
+
+//
 // Created by Ts on 25/10/2024.
 //
 
@@ -39,3 +46,5 @@ public:
 
 
 #endif //NEW_PRIORITY_QUEUE_H
+
+#endif //TEST_PQ_PRIORITY_QUEUE_H
