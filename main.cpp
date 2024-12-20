@@ -1,16 +1,30 @@
 #include <iostream>
+#include "Priority_queue.h"
 
-#include "SkipList.h"
+using namespace std;
+
 int main() {
-    srand(static_cast<unsigned>(time(0)));
-    SkipList skipList;
-    skipList.insert(3);
-    skipList.insert(6);
-    skipList.insert(13);
-    skipList.insert(9);
-    skipList.insert(12);
-    skipList.insert(18);
+    Priority_queue pq;
 
-    skipList.print();
+    pq.insert(15);
+    pq.insert(10);
+    pq.insert(30);
+    pq.insert(40);
+    pq.insert(5);
+
+
+    cout << "Maximum element: " << pq.heap_maxmium() << endl;
+
+
+    int maxElement = pq.heap_extract();
+    cout << "Extracted maximum element: " << maxElement << endl;
+
+
+    cout << "New maximum element: " << pq.heap_maxmium() << endl;
+
+
+    pq.increase_key(2, 50);
+    cout << "Maximum element after increasing key: " << pq.heap_maxmium() << endl;
+
     return 0;
 }
