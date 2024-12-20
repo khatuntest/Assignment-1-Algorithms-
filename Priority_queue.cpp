@@ -1,64 +1,69 @@
-//
-// Created by Ts on 25/10/2024.
-//
 #include <iostream>
-using namespace std;
-#include<vector>
-#include"Priority_queue.h"
+#include <vector>
+#include <climits>
+#include "Priority_queue.h"
 
+using namespace std;
 
 Priority_queue::Priority_queue() {
-    heapsize=0;
+    heapsize = 0;
 }
 
 void Priority_queue::heapify(vector<int> &heap, int index, int heapsize) {
-    int left=index*2;
-    int right=index*2+1;
-    int largest=INT_MIN;
-    if(left<heapsize && heap[index]>heap[left]){
-        largest=heap[index];
-    }else{
-        largest=heap[left];
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
+    int largest = index;
+
+    if (left < heapsize && heap[left] > heap[largest]) {
+        largest = left;
     }
-    if(right<heapsize && heap[largest]>heap[right]){
-        largest=heap[right];
+    if (right < heapsize && heap[right] > heap[largest]) {
+        largest = right;
     }
 
-    if(largest!=index){
-        swap(heap[index],heap[largest]);
-        heapify(heap,largest,heapsize);
+    if (largest != index) {
+        swap(heap[index], heap[largest]);
+        heapify(heap, largest, heapsize);
     }
 }
-
-/*void Priority_queue::build_heap(vector<int> &heap, int index, int heapsize) {
-    for(int i=heapsize/2;i<1;i--){
-        heapify(heap,i,heapsize);
-    }
-}*/
 
 int Priority_queue::heap_maxmium() {
+    if (heapsize == 0) {
+        cout << "Heap is empty!" << endl;
+        return INT_MIN; // Handle empty heap case
+    }
     return heap[0];
 }
+
 void Priority_queue::increase_key(int index, int key) {
-    heap[index]=key;
-    int i=index;
-    while(i!=1 && heap[i/2]<heap[i-1]){
-        heap[i]=heap[i/2];
-        i=i/2;
+    if (key < heap[index]) {
+        cout << "New key is smaller than current key!" << endl;
+        return;
+    }
+    heap[index] = key;
+    while (index > 0 && heap[(index - 1) / 2] < heap[index]) {
+        swap(heap[(index - 1) / 2], heap[index]);
+        index = (index - 1) / 2;
     }
 }
 
 void Priority_queue::insert(int key) {
+    heap.push_back(INT_MIN); // Add a new element at the end
     heapsize++;
-    heap[heapsize-1]=INT_MIN;
-    increase_key(heapsize-1,key);
+    increase_key(heapsize - 1, key); // Update its key
 }
 
 int Priority_queue::heap_extract() {
-    int max=heap[0];
-    heap[0]=heap[heapsize-1];
-
-    heapify(heap,1,heapsize-1);
+    if (heapsize == 0) {
+        cout << "Heap is empty!" << endl;
+        return INT_MIN; // Handle empty heap case
+    }
+    int max = heap[0];
+    heap[0] = heap[heapsize - 1];
+    heapsize--;
+    heap.pop_back();
+    heapify(heap, 0, heapsize);
+    return max;
 }
 
 
